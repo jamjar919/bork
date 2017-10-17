@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import React from 'react';
 import Graph from '../../components/graph';
 
@@ -25,4 +26,16 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+function mapStateToProps(state) {
+    // gets the state from redux
+    return {
+        example: state.example,
+    };
+}
+
+function mapDispatchToProps() {
+    return {
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
