@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UrlLoader = require("url-loader");
 
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 const APP_DIR = path.resolve(__dirname, 'src');
@@ -40,6 +41,10 @@ const config = {
         use: 'eslint-loader'
       },
       {
+        test: /\.(png|jpg)$/,
+        use: 'url-loader?limit=8192',
+      },
+      {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -64,6 +69,7 @@ const config = {
           }]
         })
       },
+      
       {
         test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         use: [{
@@ -94,7 +100,8 @@ const config = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
-      Tether: 'tether'
+      Tether: 'tether',
+      'Popper': 'popper.js'
     })
   ]
 };

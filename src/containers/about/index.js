@@ -1,5 +1,5 @@
 import React from 'react';
-import Content from 'Components/Content';
+import Content from '../../components/content';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class About extends React.Component {

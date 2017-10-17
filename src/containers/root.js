@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Navbar from 'Components/Navbar';
-import Home from './Home';
-import About from './About';
+import Navbar from '../components/navbar';
+import Home from './home';
+import About from './about';
 import '../style/main.scss';
 
 // eslint-disable-next-line react/prefer-stateless-function
