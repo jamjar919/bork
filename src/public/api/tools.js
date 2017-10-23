@@ -1,3 +1,20 @@
+import Graph from './graph';
+
+export function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - (min + 1))) + min;
+}
+
+export function intArray(min, max) {
+    if (max < min) {
+        return [];
+    }
+    const result = [];
+    for (let i = min; i < max; i += 1) {
+        result.push(i);
+    }
+    return result;
+}
+
 export function permute(array) {
     if (array.length === 1) {
         return array;
@@ -8,7 +25,7 @@ export function permute(array) {
         const el = [arrcopy[i]];
         arrcopy.splice(i, 1);
         const endings = permute(arrcopy);
-        for (let j = 0; j < endings.length; j+= 1) {
+        for (let j = 0; j < endings.length; j += 1) {
             const p = el.concat(endings[j]);
             results.push(p);
         }
@@ -19,7 +36,7 @@ export function permute(array) {
 export function splitArray(array, index) {
     return [
         array.slice(0, index),
-        array.slice(index)
+        array.slice(index),
     ];
 }
 
@@ -49,10 +66,34 @@ export function isValidPartition(G, partition) {
     return true;
 }
 
-export function calculatePartition(G, partition) {
-    // G is a graph, partition is an array of the form [[0,1,2],[3,4],...[9,10]] where each subarray is a partition
-    if (isValidPartition(G, partition)) {
-
+export function randomGraph(size, min = 0, max = 5) {
+    const G = new Graph(size);
+    for (let i = 0; i < size; i += 1) {
+        for (let j = 0; j < size; j += 1) {
+            G.weight(
+                i, j,
+                getRandomInt(min, max),
+            );
+        }
     }
-    throw Error("Invalid partition of graph");
+    return G;
+}
+
+export function calculatePartition(G, partition) {
+    // G is a graph, partition is an array of the form [[0,1,2],[3,4],...[9,10]]
+    // where each subarray is a partition
+    if (isValidPartition(G, partition)) {
+        let sum = 0;
+        for (let i = 0; i < partition.length; i += 1) {
+            for (let j = 0; j < partition[i].length; j += 1) {
+                for (let k = 0; k < G.size; k += 1) {
+                    if (!(partition[i].indexOf(k) > -1)) {
+                        sum += G.weight(partition[i][j], k);
+                    }
+                }
+            }
+        }
+        return sum;
+    }
+    throw Error('Invalid partition of graph');
 }

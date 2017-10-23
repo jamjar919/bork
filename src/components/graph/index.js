@@ -8,16 +8,31 @@ class Graph extends React.Component {
         super();
         this.state = {
             network: undefined,
+            partition: undefined,
+            colors: [],
         };
     }
 
     componentDidMount() {
+        if (this.props.partition) {
+            for (let i = 0; i < this.props.partition.length; i += 1) {
+                this.state.colors.push(`rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`);
+            }
+        }
         let nodes = [];
         for (let i = 0; i < this.props.matrix.length; i += 1) {
-            nodes.push({
+            const n = {
                 id: i,
                 label: i.toString(),
-            });
+            };
+            if (this.props.partition) {
+                for (let j = 0; j < this.props.partition.length; j += 1) {
+                    if (this.props.partition[j].indexOf(i) > -1) {
+                        n.color = this.state.colors[j];
+                    }
+                }
+            }
+            nodes.push(n);
         }
         nodes = new vis.DataSet(nodes);
         let edges = [];
@@ -50,13 +65,6 @@ class Graph extends React.Component {
         return (
             <div className={this.props.className}>
                 <div id={this.props.networkID} />
-                {
-                    (this.props.partition)
-                    ?
-                        <div id={`${this.props.networkID}-partition`} />
-                    :
-                        ''
-                }
             </div>
         );
     }

@@ -10,12 +10,12 @@ export default class Graph {
         }
         for (let i = 0; i < numberOfVertices; i += 1) {
             // deepcopy to destroy object reference
-            let copy = Object.assign([], row);
+            const copy = Object.assign([], row);
             this.matrix.push(copy);
         }
     }
     weight(from, to, value) {
-        if (typeof value !== 'undefined') { 
+        if (typeof value !== 'undefined') {
             this.matrix[from][to] = value;
         }
         return this.matrix[from][to];
@@ -23,7 +23,7 @@ export default class Graph {
     adjacent(vertex) {
         const result = [];
         for (let i = 0; i < this.matrix[vertex].length; i += 1) {
-            if (this.matrix[vertex][i] != 0) {
+            if (this.matrix[vertex][i] !== 0) {
                 result.push(i);
             }
         }
@@ -43,6 +43,6 @@ export default class Graph {
                 return;
             }
         }
-        throw Error("Array not of same size");
+        throw Error('Array not of same size');
     }
 }
