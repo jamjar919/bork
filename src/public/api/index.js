@@ -1,5 +1,6 @@
 /* eslint-disable */
 import Graph from './graph';
+import { brute } from './solvers';
 import { permute,isValidPartition, calculatePartition, splitArray, randomGraph, intArray } from './tools.js';
 
 // const G = new Graph(5);
@@ -12,25 +13,9 @@ import { permute,isValidPartition, calculatePartition, splitArray, randomGraph, 
 // ]);
 
 
-for(let a = 0; a < 5; a += 1) {
-    const G = randomGraph(6);    
-    console.time("random");    
-    const permutations = permute(intArray(0, G.size));
-    let bestPartition = [];
-    let best = null;
-    for (let i = 0; i < permutations.length; i += 1) {
-        const p = permutations[i];
-        const partition = splitArray(p, p.length/2);
-        const score = calculatePartition(G, partition);
-        if (
-            (best === null) ||
-            (score < best)        
-        ) {
-            bestPartition = partition;
-            best = score;
-        }
-    }
-    console.timeEnd("random");    
-}
+const G = randomGraph(7);    
+const sol = brute(G);
+console.log(G);
+console.log(sol);
 
 //console.log(g.matrix);
