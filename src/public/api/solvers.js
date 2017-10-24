@@ -1,4 +1,4 @@
-import { permute, calculatePartition, splitArray, intArray } from './tools';
+import { permute, calculatePartition, splitArray, intArray, getRandomInt } from './tools';
 
 export function brute(G) {
     const permutations = permute(intArray(0, G.size));
@@ -19,6 +19,12 @@ export function brute(G) {
     return bestPartition;
 }
 
-export function fillGraph() {
+export function fillGraph(G) {
+    // Select two random nodes
+    const node1 = getRandomInt(0, G.size);
+    const node2 = getRandomInt(0, G.size);
+    const partitions = [];
+    while() {
 
+    }
 }
