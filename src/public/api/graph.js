@@ -46,6 +46,6 @@ export default class Graph {
         throw Error('Array not of same size');
     }
     neighbours(node) {
-        return this.matrix[node];
+        return Object.assign([], this.matrix[node]);
     }
 }

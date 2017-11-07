@@ -15,6 +15,17 @@ export function intArray(min, max) {
     return result;
 }
 
+export function addArray(a1, a2) {
+    if (a1.length < a2.length) {
+        throw Error('a1 should be bigger than a2, sized wrong');
+    }
+    const result = Object.assign([], a1);
+    for (let i = 0; i < a1.length; i += 1) {
+        result[i] += a2[i];
+    }
+    return result;
+}
+
 export function permute(array) {
     if (array.length === 1) {
         return array;

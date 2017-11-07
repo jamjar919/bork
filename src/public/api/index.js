@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Graph from './graph';
-import { brute } from './solvers';
+import { brute, fillGraph} from './solvers';
 import { permute,isValidPartition, calculatePartition, splitArray, randomGraph, intArray } from './tools.js';
 
 // const G = new Graph(5);
@@ -13,9 +13,23 @@ import { permute,isValidPartition, calculatePartition, splitArray, randomGraph, 
 // ]);
 
 
-const G = randomGraph(7);    
-const sol = brute(G);
+const G = randomGraph(20, -5, 10);
 console.log(G);
-console.log(sol);
-
-//console.log(g.matrix);
+let best = undefined;
+let bestSol = [];
+let worst = 0;
+let worstSol = [];
+for (let i = 0; i < 100; i += 1) {
+    const sol = fillGraph(G, 3);
+    const cut = calculatePartition(G, sol);
+    if (cut > worst) {
+        worst = cut;
+        worstSol = sol;
+    }
+    if ((cut < best) || !best) {
+        best = cut;
+        bestSol = sol;
+    }
+}
+console.log('best solution', bestSol, 'with weight', best);
+console.log('worst solution', worstSol, 'with weight', worst);
