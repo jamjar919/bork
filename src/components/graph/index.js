@@ -18,6 +18,45 @@ class Graph extends React.Component {
     }
 
     componentDidMount() {
+        this.renderGraph();
+        this.getIntersectingEdgeIds();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.matrix !== this.props.matrix) {
+            this.renderGraph();
+        }
+        if (this.props.partition) {
+            const ids = this.state.intersectingEdges;
+            for (let i = 0; i < ids.length; i += 1) {
+                this.state.edges.update({ id: ids[i], hidden: this.state.hideEdges });
+            }
+        }
+    }
+
+    getIntersectingEdgeIds() {
+        if (this.props.partition) {
+            const intersectingEdges = [];
+            const ids = this.state.edges.getIds();
+            for (let i = 0; i < ids.length; i += 1) {
+                const edge = this.state.edges.get(ids[i]);
+                for (let j = 0; j < this.props.partition.length; j += 1) {
+                    const group = this.props.partition[j];
+                    for (let a = 0; a < group.length; a += 1) {
+                        if (
+                            (group.indexOf(edge.from) > -1) &&
+                            (!(group.indexOf(edge.to) > -1))
+                        ) {
+                            intersectingEdges.push(ids[i]);
+                        }
+                    }
+                }
+            }
+            this.setState({ intersectingEdges });
+        }
+    }
+
+    renderGraph() {
         if (this.props.partition) {
             for (let i = 0; i < this.props.partition.length; i += 1) {
                 this.state.colors.push(`rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`);
@@ -96,38 +135,6 @@ class Graph extends React.Component {
                 }
             }
         });
-        this.getIntersectingEdgeIds();
-    }
-
-    componentDidUpdate() {
-        if (this.props.partition) {
-            const ids = this.state.intersectingEdges;
-            for (let i = 0; i < ids.length; i += 1) {
-                this.state.edges.update({ id: ids[i], hidden: this.state.hideEdges });
-            }
-        }
-    }
-
-    getIntersectingEdgeIds() {
-        if (this.props.partition) {
-            const intersectingEdges = [];
-            const ids = this.state.edges.getIds();
-            for (let i = 0; i < ids.length; i += 1) {
-                const edge = this.state.edges.get(ids[i]);
-                for (let j = 0; j < this.props.partition.length; j += 1) {
-                    const group = this.props.partition[j];
-                    for (let a = 0; a < group.length; a += 1) {
-                        if (
-                            (group.indexOf(edge.from) > -1) &&
-                            (!(group.indexOf(edge.to) > -1))
-                        ) {
-                            intersectingEdges.push(ids[i]);
-                        }
-                    }
-                }
-            }
-            this.setState({ intersectingEdges });
-        }
     }
 
     render() {
