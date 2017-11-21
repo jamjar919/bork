@@ -9,7 +9,7 @@ const reducer = (state = DEFAULT, action) => {
     case UPDATE_CURRENT_GRAPH:
         return action.payload.graph;
     default:
-        return DEFAULT;
+        return state;
     }
 };
 

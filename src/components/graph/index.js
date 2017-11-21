@@ -23,7 +23,11 @@ class Graph extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.matrix !== this.props.matrix) {
+        console.log('update');
+        if (
+            (prevProps.matrix !== this.props.matrix) ||
+            (prevProps.partition !== this.props.partition)
+        ) {
             this.renderGraph();
         }
         if (this.props.partition) {

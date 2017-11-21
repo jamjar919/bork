@@ -1,49 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import GraphProvider from '../../containers/graphprovider';
 import Graph from '../../components/graph';
-
-import { updateCurrentGraphAction } from '../../actions';
+import CurrentGraphControls from '../../components/currentgraphcontrols';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class PlanViewer extends React.Component {
 
-    componentWillMount() {
-        this.fetchGraph(this.props.match.params.id);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.match.params.id !== prevProps.match.params.id) {
-            // Make a network request to load in the graph details
-            this.fetchGraph(this.props.match.params.id);
-        }
-    }
-
-    fetchGraph(id) {
-        fetch(`http://localhost:3000/api/graphs/${id}`, {
-            method: 'get',
-        }).then(response => response.json()).then((response) => {
-            this.props.updateGraph(response);
-        });
-    }
-
     render() {
         const id = this.props.match.params.id;
         return (
-            <div className="plan">
-                <Graph
-                    networkID={id}
-                    matrix={this.props.graph.data}
-                    solution={this.props.solution}
-                />
-            </div>
+            <GraphProvider id={id}>
+                <div className="plan col-md-9">
+                    <CurrentGraphControls
+                        id={id}
+                    />
+                    <div className="graphContainer">
+                        <Graph
+                            networkID={id}
+                            matrix={this.props.graph.data}
+                            partition={this.props.solution}
+                        />
+                    </div>
+                </div>
+            </GraphProvider>
         );
     }
 }
 
 PlanViewer.propTypes = {
     match: PropTypes.shape(Object).isRequired,
-    updateGraph: PropTypes.func.isRequired,
     graph: PropTypes.shape(Object).isRequired,
     // graphId: PropTypes.string.isRequired,
     solution: PropTypes.arrayOf(Array),
@@ -57,9 +44,8 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps() {
     return {
-        updateGraph: updateCurrentGraphAction(dispatch),
     };
 }
 

@@ -7,7 +7,7 @@ const reducer = (state = DEFAULT, action) => {
     case UPDATE_CURRENT_SOLUTION:
         return action.payload.solution;
     default:
-        return DEFAULT;
+        return state;
     }
 };
 
