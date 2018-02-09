@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import CONFIG from '../../config';
+import { Link } from 'react-router-dom';
 
 const GraphListItem = props => (
     <li className={`graphListItem ${props.className}`}>
-        <a href={`${CONFIG.HOST}/${props.id}`}>{props.name}</a>
+        <Link to={`/${props.id}`}>{props.name}</Link> - <Link to={`/${props.id}/edit`}>Edit</Link>
     </li>
 );
 

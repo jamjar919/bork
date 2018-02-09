@@ -1,0 +1,34 @@
+.collapsable-column {
+    transition: flex 0.5s;
+}
+
+.column-collapsed {
+    flex: 0 !important;
+}
+
+.collapsable-card {
+    margin-bottom: 1em;
+}
+
+.collapsable-card .card-body-collapse {
+    overflow: hidden;
+    transition: max-height 0.5s;
+    height: auto;
+    max-height: 1000px;
+}
+
+.collapse-card-button {
+    float: right;
+}
+
+.column-collapsed .card-collapsed .collapse-card-button {
+    float: none;
+}
+
+.card-collapsed .card-body-collapse {
+    max-height: 0;
+}
+
+.column-collapsed h3.card-header {
+    text-align: center;
+}

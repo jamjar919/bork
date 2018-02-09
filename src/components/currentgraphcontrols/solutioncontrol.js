@@ -6,6 +6,12 @@ import { updateCurrentSolutionAction } from '../../actions';
 import CONFIG from '../../config';
 
 class SolutionControl extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            optionsOpen: false,
+        };
+    }
 
     getGraphSolution(id, method) {
         fetch(`${CONFIG.API.ADDRESS}/graphs/${id}/solve?method=${method}`, {
@@ -16,14 +22,29 @@ class SolutionControl extends React.Component {
     }
 
     render() {
+        const options = (
+            <div className="options">
+                dsadsakd
+            </div>
+        );
         return (
-            <button
-                onClick={() => {
-                    this.getGraphSolution(this.props.graphId, 'fill');
-                }}
-            >
-                Solve
-            </button>
+            <div>
+                <button
+                    onClick={() => {
+                        this.getGraphSolution(this.props.graphId, 'coarsegrow');
+                    }}
+                >
+                    Solve
+                </button>
+                <button
+                    onClick={() => { this.setState({ optionsOpen: !this.state.optionsOpen }); }}
+                >
+                    Options
+                </button>
+                {
+                    (this.state.optionsOpen) ? options : ''
+                }
+            </div>
         );
     }
 }

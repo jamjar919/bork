@@ -1,9 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import Navbar from '../components/navbar';
+import Topbar from '../components/topbar';
+import Footer from '../components/footer';
 import Home from './home';
 import About from './about';
 import PlanViewer from '../components/planviewer';
@@ -27,14 +29,27 @@ class Root extends React.Component {
         return (
             <Provider store={store}>
                 <Router history={browserHistory}>
-                    <div className="row">
-                        <Navbar
-                            className="col-3"
-                        />
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/about" component={About} />
-                        <Route path="/:id/edit" component={PlanEditor} />
-                        <Route path="/:id" component={PlanViewer} />
+                    <div>
+                        <Topbar />
+                        <div className="content-container">
+                            <Navbar
+                                className="col-3"
+                            />
+                            <Switch>
+                                <Route exact path="/" component={Home} />
+                                <Route exact path="/about" component={About} />
+                                <Route
+                                    path="/:id"
+                                    component={() => (
+                                        <Switch>
+                                            <Route exact path="/:id" component={PlanViewer} />
+                                            <Route path="/:id/edit" component={PlanEditor} />
+                                        </Switch>
+                                    )}
+                                />
+                            </Switch>
+                        </div>
+                        <Footer />
                     </div>
                 </Router>
             </Provider>

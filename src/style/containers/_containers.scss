@@ -1,2 +1,49 @@
 @import 'about/about';
 @import 'home/home';
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.column-left {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    max-width: 200px;
+    transition: flex 0.5s;
+    background-color: #ecf0f1;
+    min-height: 100%;
+}
+
+.column-left.column-left-minimised {
+    flex: 0;
+    text-align: center;
+    width: 80px;
+    font-size: 1.5em;
+}
+
+.content {
+    padding: 1em;
+    flex: 3;
+}
+
+.two-cols {
+    display: flex;
+    align-items: flex-start;
+}
+
+.two-cols > div {
+    flex: 1;
+}
+
+.two-cols > div:first-child {
+    margin-right: 0.5em;
+}
+
+.two-cols > div:last-child {
+    margin-left: 0.5em;
+}
+
+@import 'collapsable.scss';

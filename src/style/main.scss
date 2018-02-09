@@ -1,12 +1,13 @@
 @import '~vis/dist/vis.min.css';
-@import "~bootstrap/scss/bootstrap.scss";
 
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
 
 @import '_variables';
 @import '_colours';
-@import '_base';
+
+@import "_bootstrap.scss";
+
 
 @import 'components/components';
 @import 'containers/containers';

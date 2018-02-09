@@ -1,0 +1,39 @@
+.editRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.editRow .rowLabel {
+    min-width: 5em;
+}
+
+.editCell {
+    flex: 1 1;
+}
+
+.editCell input {
+    transition: 0.5s background-color;
+    max-width: 3em;
+    border: none;
+}
+
+.editCell.hasValue input {
+    background-color: #cccccc;
+}
+
+.editCell.loading input {
+    background-color: #f8ac59;
+}
+
+.editCell.loaded input {
+    background-color: #1ab394;
+}
+
+.matrixLabels {
+    margin-bottom: 1em;
+}
+
+.matrixLabels, .rowLabel {
+    font-weight: 800;
+}

@@ -23,14 +23,15 @@ class Graph extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('update');
         if (
             (prevProps.matrix !== this.props.matrix) ||
             (prevProps.partition !== this.props.partition)
         ) {
+            console.log(`rerendering graph ${this.props.networkID}`);
             this.renderGraph();
         }
         if (this.props.partition) {
+            console.log(`retrieving intersecting edges for graph ${this.props.networkID}`);
             const ids = this.state.intersectingEdges;
             for (let i = 0; i < ids.length; i += 1) {
                 this.state.edges.update({ id: ids[i], hidden: this.state.hideEdges });
@@ -65,12 +66,16 @@ class Graph extends React.Component {
             for (let i = 0; i < this.props.partition.length; i += 1) {
                 this.state.colors.push(`rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`);
             }
+            this.props.colorCallback(this.state.colors);
         }
         const nodes = [];
         for (let i = 0; i < this.props.matrix.length; i += 1) {
             const n = {
                 id: i,
-                label: i.toString(),
+                label: this.props.names[i] ? this.props.names[i] : i.toString(),
+                font: {
+                    color: this.props.partition.length > 0 ? '#FFF' : '#343434',
+                },
             };
             if (this.props.partition) {
                 for (let j = 0; j < this.props.partition.length; j += 1) {
@@ -159,6 +164,8 @@ class Graph extends React.Component {
 Graph.defaultProps = {
     className: '',
     partition: undefined,
+    names: [],
+    colorCallback: () => {},
 };
 
 Graph.propTypes = {
@@ -166,6 +173,8 @@ Graph.propTypes = {
     className: PropTypes.string,
     matrix: PropTypes.arrayOf(PropTypes.arrayOf(Number)).isRequired,
     partition: PropTypes.arrayOf(PropTypes.arrayOf(Number)),
+    names: PropTypes.arrayOf(PropTypes.string),
+    colorCallback: PropTypes.func,
 };
 
 export default Graph;
