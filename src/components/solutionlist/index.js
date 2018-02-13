@@ -8,13 +8,7 @@ import '../../bootstrap.min';
 // eslint-disable-next-line react/prefer-stateless-function
 class SolutionList extends React.Component {
 
-    shouldComponentUpdate(nextProps) {
-        console.log(nextProps);
-        return true;
-    }
-
     render() {
-        console.log(this.props.graphColors);
         const menuItems = [];
         for (let i = 0; i < this.props.partition.length; i += 1) {
             menuItems.push(

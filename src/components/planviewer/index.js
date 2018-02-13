@@ -70,7 +70,7 @@ class PlanViewer extends React.Component {
                             collapse={this.state.rightColCollapse}
                         >
                             <CollapsableCard
-                                title="Solution"
+                                title="Solve"
                                 collapse={this.props.solutionPanelCollapsed}
                                 onMinimise={this.props.toggleSolutionPanel}
                                 parentCollapsed={this.state.rightColCollapse}
@@ -82,11 +82,19 @@ class PlanViewer extends React.Component {
                                             id={id}
                                         />
                                     </div>
-                                    <SolutionList
-                                        names={this.props.graph.names}
-                                        partition={this.props.solution}
-                                    />
                                 </div>
+                            </CollapsableCard>
+                            <CollapsableCard
+                                title="Solution"
+                                collapse={this.props.solutionPanelCollapsed}
+                                onMinimise={this.props.toggleSolutionPanel}
+                                parentCollapsed={this.state.rightColCollapse}
+                                icon="line-chart"
+                            >
+                                <SolutionList
+                                    names={this.props.graph.names}
+                                    partition={this.props.solution}
+                                />
                             </CollapsableCard>
                             <CollapsableCard
                                 title="Participants"

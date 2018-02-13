@@ -1,0 +1,32 @@
+.solve-buttons, .solution-method-select {
+    display: flex;
+    justify-content: center;
+}
+
+.solve-buttons button {
+    margin: 1em;
+}
+
+.solve-button .fa {
+    margin-left: 0.5em;
+}
+
+.partition-resizer {
+    margin-bottom: 40px;
+}
+
+.partition-resizer .rc-slider-handle {
+    height: 20px;
+    width: 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+.partition-resizer .rc-slider-track, .partition-resizer .rc-slider-rail {
+    height: 30px;
+    border-radius: 0;
+}
+
+.partition-sizes-indicator {
+    justify-content: center;
+}

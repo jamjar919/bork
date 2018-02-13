@@ -1,27 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SolutionControl from './solutioncontrol';
 
-
 const CurrentGraphControls = props => (
     <div className="graphControl">
-        <SolutionControl />
-        &nbsp;-&nbsp;
-        <Link to={`/${props.id}/edit`}>
-            Edit
-        </Link>
+        <SolutionControl
+            size={props.graph.data.length}
+        />
     </div>
 );
 
 CurrentGraphControls.propTypes = {
-    id: PropTypes.string,
+    // id: PropTypes.string,
+    graph: PropTypes.shape(Object),
 };
 
 function mapStateToProps(state) {
     return {
         id: state.graphId,
+        graph: state.graph,
     };
 }
 
