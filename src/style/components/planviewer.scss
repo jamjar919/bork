@@ -30,3 +30,35 @@
 .partition-sizes-indicator {
     justify-content: center;
 }
+
+.vis-network canvas {
+    height: 500px !important;
+}
+
+.name-list-item {
+    transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.name-list-item:hover {
+    background-color: #18BC9C;
+    border-color: rgb(28, 189, 157);
+    color: #FFF;
+}
+
+.name-list-item .name-edit-icon {
+    will-change: transform;
+    transition: transform 0.5s;
+    transform: scaleX(0);
+}
+
+.name-list-item:hover .name-edit-icon {
+    transform: scaleX(1);
+}
+
+.edit-name-box {
+    color: #000;
+}
+
+.edit-name-group {
+    padding-right: 1.5em
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Name from './name';
+
 // eslint-disable-next-line react/prefer-stateless-function
 class NameList extends React.Component {
 
@@ -8,11 +10,7 @@ class NameList extends React.Component {
         const rows = [];
         const names = this.props.names;
         for (let i = 0; i < this.props.size; i += 1) {
-            if (names[i]) {
-                rows.push(<li key={i} className="list-group-item d-flex justify-content-between align-items-center">{names[i]}<span className="badge badge-primary badge-pill">{i}</span></li>);
-            } else {
-                rows.push(<li key={i} className="list-group-item d-flex justify-content-between align-items-center">Unnamed<span className="badge badge-primary badge-pill">{i}</span></li>);
-            }
+            rows.push(<Name key={i} id={i} name={names[i]} />);
         }
         if (rows.length < 1) {
             rows.push(<li key="-1" className="list-group-item">Nothing to display</li>);

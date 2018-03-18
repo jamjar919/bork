@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import GraphProvider from '../../containers/graphprovider';
 import Graph from '../../components/graph';
@@ -49,6 +50,7 @@ class PlanViewer extends React.Component {
                     <h3>
                         {this.props.graph.name}
                         <small className="text-muted"> Viewing</small>
+                        <small className="text-muted pull-right"> <Link to={`/${this.props.graphId}/edit`}>Edit</Link></small>
                     </h3>
                     <div className="two-cols">
                         <div className="cardContainer">
@@ -119,7 +121,7 @@ class PlanViewer extends React.Component {
 PlanViewer.propTypes = {
     match: PropTypes.shape(Object).isRequired,
     graph: PropTypes.shape(Object).isRequired,
-    // graphId: PropTypes.string.isRequired,
+    graphId: PropTypes.string.isRequired,
     solution: PropTypes.arrayOf(Array),
     solutionPanelCollapsed: PropTypes.bool.isRequired,
     peoplePanelCollapsed: PropTypes.bool.isRequired,
