@@ -10,7 +10,7 @@ class NameList extends React.Component {
         const rows = [];
         const names = this.props.names;
         for (let i = 0; i < this.props.size; i += 1) {
-            rows.push(<Name key={i} id={i} name={names[i]} />);
+            rows.push(<Name key={i} id={i} name={names[i]} className="list-group-item" />);
         }
         if (rows.length < 1) {
             rows.push(<li key="-1" className="list-group-item">Nothing to display</li>);

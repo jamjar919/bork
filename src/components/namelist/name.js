@@ -31,7 +31,20 @@ class Name extends React.Component {
             editing: false,
             name: this.props.name,
             timerId: 0,
+            backgroundColor: 'inherit',
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (typeof nextProps.lockEditingTo !== 'undefined') {
+            if (typeof this.props.lockEditingTo !== 'undefined') {
+                if (nextProps.lockEditingTo !== this.props.lockEditingTo) {
+                    this.setState({ editing: nextProps.lockEditingTo });
+                }
+            } else {
+                this.setState({ editing: this.nextProps.lockEditingTo });
+            }
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -39,6 +52,7 @@ class Name extends React.Component {
             (nextProps !== this.props)
             || (nextState.name !== this.state.name)
             || (nextState.editing !== this.state.editing)
+            || (nextState.backgroundColor !== this.state.backgroundColor)
         ) {
             return true;
         }
@@ -59,10 +73,17 @@ class Name extends React.Component {
         }
     }
 
+    editStateWrapper(desiredEditState) {
+        if (typeof this.props.lockEditingTo !== 'undefined') {
+            return this.props.lockEditingTo;
+        }
+        return desiredEditState;
+    }
+
     newTimer() {
         clearTimeout(this.state.timerId);
         const a = setTimeout(() => {
-            this.setState({ editing: false });
+            this.setState({ editing: this.editStateWrapper(false) });
         }, 5000);
         this.setState({
             timerId: a,
@@ -76,9 +97,20 @@ class Name extends React.Component {
                 this.props.id,
                 this.props.graphId,
                 e.target.value,
-                callback,
+                (response) => {
+                    this.flashGreen();
+                    callback(response);
+                },
             );
         }
+    }
+
+    flashGreen() {
+        this.setState({ backgroundColor: '#18BC9C' }, () => {
+            setTimeout(() => {
+                this.setState({ backgroundColor: 'inherit' });
+            }, 250);
+        });
     }
 
     render() {
@@ -89,13 +121,14 @@ class Name extends React.Component {
                     placeholder={this.state.name}
                     defaultValue={this.state.name}
                     className="form-control edit-name-box"
+                    style={{ backgroundColor: this.state.backgroundColor }}
                     onKeyUp={(e) => {
                         this.keyWrapper(
                             e,
                             (response) => {
                                 this.setState({
                                     name: response.names[this.props.id],
-                                    editing: false,
+                                    editing: this.editStateWrapper(false),
                                 });
                             },
                         );
@@ -120,9 +153,12 @@ class Name extends React.Component {
         return (
             <li
                 key={this.props.id}
-                className="list-group-item d-flex justify-content-between align-items-center name-list-item"
-                onClick={() => {
-                    this.setState({ editing: true });
+                className={`${this.props.className} d-flex justify-content-between align-items-center name-list-item`}
+                onClick={(e) => {
+                    if (this.state.editing) {
+                        e.stopPropagation();
+                    }
+                    this.setState({ editing: this.editStateWrapper(true) });
                 }}
             >
                 {
@@ -138,10 +174,13 @@ Name.propTypes = {
     name: PropTypes.string,
     id: PropTypes.number.isRequired,
     graphId: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    lockEditingTo: PropTypes.any,
 };
 
 Name.defaultProps = {
     name: 'Unnamed',
+    className: '',
 };
 
 

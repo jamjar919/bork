@@ -17,6 +17,7 @@
     "popper.js": "^1.12.5",
     "rc-slider": "^8.6.0",
     "react-number-editor": "^4.0.3",
+    "react-numeric-input": "^2.2.3",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "uuid": "^3.1.0",

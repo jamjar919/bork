@@ -27,6 +27,7 @@
 .content {
     padding: 1em;
     flex: 3;
+    max-width: calc(100% - 80px);
 }
 
 .two-cols {

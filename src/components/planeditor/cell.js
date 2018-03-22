@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NumericInput from 'react-numeric-input';
 
 import CONFIG from '../../config';
-
-const $ = require('jquery');
-const uuidv4 = require('uuid/v4');
 
 function updateEdge(id, from, to, value, callback) {
     const body = new URLSearchParams(`from=${from.toString()}&to=${to.toString()}&value=${value.toString()}`);
@@ -24,7 +22,6 @@ class Cell extends React.Component {
     constructor() {
         super();
         this.state = {
-            id: uuidv4(),
             loading: false,
             loaded: false,
             error: true,
@@ -34,18 +31,17 @@ class Cell extends React.Component {
 
     /* eslint-disable react/no-did-mount-set-state */
     componentDidMount() {
-        $(`#${this.state.id}`).val(this.props.initialValue);
         this.setState({ hasValue: this.props.initialValue !== 0 });
     }
 
     render() {
         return (
             <div className={`editCell ${this.props.className} ${this.state.id} ${this.state.loaded ? 'loaded' : ''} ${this.state.loading ? 'loading' : ''} ${this.state.hasValue ? 'hasValue' : ''}`}>
-                <input
+                <NumericInput
                     id={this.state.id}
                     type="number"
-                    onChange={() => {
-                        const value = $(`#${this.state.id}`).val();
+                    defaultValue={this.props.initialValue}
+                    onChange={(value) => {
                         // eslint-disable-next-line eqeqeq
                         if (value == parseInt(value, 10)) {
                             this.setState({ loading: true });
@@ -66,6 +62,7 @@ class Cell extends React.Component {
                             this.setState({ error: true });
                         }
                     }}
+                    disabled={this.props.from === this.props.to}
                 />
             </div>
         );

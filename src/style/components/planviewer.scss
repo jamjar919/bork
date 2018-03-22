@@ -31,15 +31,11 @@
     justify-content: center;
 }
 
-.vis-network canvas {
-    height: 500px !important;
-}
-
-.name-list-item {
+.name-list-item, .edit-name-box {
     transition: background-color 0.25s, border-color 0.25s, color 0.25s;
 }
 
-.name-list-item:hover {
+.list-group-item.name-list-item:hover {
     background-color: #18BC9C;
     border-color: rgb(28, 189, 157);
     color: #FFF;

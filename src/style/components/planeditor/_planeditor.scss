@@ -37,3 +37,58 @@
 .matrixLabels, .rowLabel {
     font-weight: 800;
 }
+
+.pagination-wrapper {
+    width: 100%;
+    margin-top: 1em;
+    display: flex;
+}
+
+.pagination-wrapper .pagination {
+    flex-align: center;
+    margin: 0 auto;
+}
+
+.search-information {
+    margin: 5px 2px 10px 2px;
+}
+
+.list-editor .list-group-item {
+    cursor: pointer;
+    will-change: background-color, border-color, color;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    display: block;
+    position: relative;
+}
+
+.list-editor .list-group-item:hover {
+    color: #fff;
+    background-color: #2C3E50;
+    border-color: #2C3E50;
+}
+
+.list-editor-row {
+    height: 0;
+    display: flex;
+    will-change: height;
+    transition: height 0.5s;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.list-editor-row.list-editor-row-open {
+    height: auto;
+}
+
+.list-editor-row .editCell {
+    flex: 1 1;
+}
+
+.list-editor-item-open, .list-editor .list-editor-item-open.list-group-item:hover {
+    background-color: #ecf0f1;
+    color: #212529;
+}
+
+.list-editor-item-row-header {
+    margin-bottom: 5px;
+}
