@@ -63,10 +63,12 @@ class PlanEditor extends React.Component {
                 />
             );
         }
+        const switchEditModeButton = CONFIG.EDIT.MAX_MATRIX_SIZE > this.props.graph.data.length ?
+            <a onClick={() => { this.switchEditMode(); }}>Switch Edit Mode</a> : <span />;
         return (
             <GraphProvider id={id}>
                 <div className="planeditWrapper content">
-                    <h3>{this.props.graph.name}<small className="text-muted"> Editing <a onClick={() => { this.switchEditMode(); }}>Switch Edit Mode</a></small> <small className="text-muted pull-right"><Link to={`/${id}`}>View</Link></small></h3>
+                    <h3>{this.props.graph.name}<small className="text-muted"> Editing {switchEditModeButton}</small> <small className="text-muted pull-right"><Link to={`/${id}`}>View</Link></small></h3>
                     <div className="planedit">
                         {editor}
                     </div>

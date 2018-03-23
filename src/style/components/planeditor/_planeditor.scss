@@ -55,8 +55,6 @@
 
 .list-editor .list-group-item {
     cursor: pointer;
-    will-change: background-color, border-color, color;
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
     display: block;
     position: relative;
 }
@@ -70,8 +68,6 @@
 .list-editor-row {
     height: 0;
     display: flex;
-    will-change: height;
-    transition: height 0.5s;
     flex-wrap: wrap;
     overflow: hidden;
 }
