@@ -16,7 +16,7 @@ class SolutionControl extends React.Component {
             optionsOpen: false,
             partitions: 2,
             sizes: [],
-            method: 'fill',
+            method: 'coarsegrow',
             loadingSolution: false,
             loadedSolution: false,
             errorLoadingSolution: false,
@@ -86,6 +86,12 @@ class SolutionControl extends React.Component {
                                 onClick={() => { this.setState({ method: 'coarsegrow' }); }}
                             >
                                 Coarse/Grow
+                            </button>
+                            <button
+                                className={`btn btn-primary ${this.state.method === 'spectral' ? 'active' : ''}`}
+                                onClick={() => { this.setState({ method: 'spectral' }); }}
+                            >
+                                Spectral
                             </button>
                         </div>
                     </div>
