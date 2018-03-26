@@ -7,6 +7,7 @@ import menuMinimisedReducer from './menuMinimised';
 import peoplePanelCollapsedReducer from './peoplePanelCollapsed';
 import solutionPanelCollapsedReducer from './solutionPanelCollapsed';
 import graphColorsReducer from './graphColors';
+import solutionInfoReducer from './solutionInfo';
 
 export default combineReducers(
     Object.assign({}, {
@@ -18,5 +19,6 @@ export default combineReducers(
         peoplePanelCollapsed: peoplePanelCollapsedReducer,
         solutionPanelCollapsed: solutionPanelCollapsedReducer,
         graphColors: graphColorsReducer,
+        solutionInfo: solutionInfoReducer,
     }),
 );

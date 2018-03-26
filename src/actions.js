@@ -28,9 +28,9 @@ export function updateCurrentGraphAction(dispatch) {
 export const UPDATE_CURRENT_SOLUTION = 'UPDATE_CURRENT_SOLUTION';
 
 export function updateCurrentSolutionAction(dispatch) {
-    return solution => dispatch({
+    return (solution, solutionInfo) => dispatch({
         type: UPDATE_CURRENT_SOLUTION,
-        payload: { solution },
+        payload: { solution, solutionInfo },
     });
 }
 

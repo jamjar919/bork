@@ -41,7 +41,7 @@ class SolutionControl extends React.Component {
                     method: 'get',
                 }).then(response => response.json()).then((response) => {
                     if (!response.error) {
-                        this.props.updateGraphSolution(response.solution);
+                        this.props.updateGraphSolution(response.solution, response.solutionInfo);
                         this.setState({ loadingSolution: false }, () => {
                             this.setState({ loadedSolution: true });
                         });
@@ -70,10 +70,10 @@ class SolutionControl extends React.Component {
                     <div className="form-group row solution-method-select">
                         <div className="btn-group btn-group-toggle" data-toggle="buttons">
                             <button
-                                className={`btn btn-primary ${this.state.method === 'brute' ? 'active' : ''}`}
-                                onClick={() => { this.setState({ method: 'brute' }); }}
+                                className={`btn btn-primary ${this.state.method === 'rand' ? 'active' : ''}`}
+                                onClick={() => { this.setState({ method: 'rand' }); }}
                             >
-                                Brute Force
+                                Random
                             </button>
                             <button
                                 className={`btn btn-primary ${this.state.method === 'fill' ? 'active' : ''}`}

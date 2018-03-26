@@ -36,6 +36,9 @@ class Name extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        if (nextProps.name !== this.state.name) {
+            this.setState({ name: nextProps.name });
+        }
         if (typeof nextProps.lockEditingTo !== 'undefined') {
             if (typeof this.props.lockEditingTo !== 'undefined') {
                 if (nextProps.lockEditingTo !== this.props.lockEditingTo) {
@@ -114,6 +117,7 @@ class Name extends React.Component {
     }
 
     render() {
+        console.log(this.state.name);
         const editbox = (
             <div className="input-group edit-name-group">
                 <input

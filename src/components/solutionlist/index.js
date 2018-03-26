@@ -60,6 +60,9 @@ class SolutionList extends React.Component {
                 <style>
                     {style}
                 </style>
+                <div className="solution-stats">
+                    {JSON.stringify(this.props.solutionInfo)}
+                </div>
                 <ul className="nav nav-tabs" data-tabs="tabs">
                     {menuItems}
                 </ul>
@@ -75,6 +78,7 @@ SolutionList.propTypes = {
     partition: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
     names: PropTypes.arrayOf(PropTypes.string),
     graphColors: PropTypes.arrayOf(PropTypes.string).isRequired,
+    solutionInfo: PropTypes.shape(Object).isRequired,
 };
 
 SolutionList.defaultProps = {
@@ -86,6 +90,7 @@ SolutionList.defaultProps = {
 function mapStateToProps(state) {
     return {
         graphColors: state.graphColors,
+        solutionInfo: state.solutionInfo,
     };
 }
 
