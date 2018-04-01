@@ -117,7 +117,6 @@ class Name extends React.Component {
     }
 
     render() {
-        console.log(this.state.name);
         const editbox = (
             <div className="input-group edit-name-group">
                 <input

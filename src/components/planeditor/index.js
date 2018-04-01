@@ -7,6 +7,7 @@ import ListEditor from './listeditor';
 import GraphProvider from '../../containers/graphprovider';
 import Row from './row';
 import Cell from './cell';
+import DeleteGraph from '../currentgraphcontrols/deletegraph';
 
 import CONFIG from '../../config';
 
@@ -68,7 +69,7 @@ class PlanEditor extends React.Component {
         return (
             <GraphProvider id={id}>
                 <div className="planeditWrapper content">
-                    <h3>{this.props.graph.name}<small className="text-muted"> Editing {switchEditModeButton}</small> <small className="text-muted pull-right"><Link to={`/${id}`}>View</Link></small></h3>
+                    <h3>{this.props.graph.name}<small className="text-muted"> Editing {switchEditModeButton}</small> <small className="text-muted pull-right"><DeleteGraph /><Link className="btn btn-info" to={`/${id}`}>View</Link></small></h3>
                     <div className="planedit">
                         {editor}
                     </div>
