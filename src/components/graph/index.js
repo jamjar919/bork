@@ -39,6 +39,19 @@ class Graph extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        this.state.network.destroy();
+        this.setState({
+            network: undefined,
+            nodes: undefined,
+            edges: undefined,
+            partition: undefined,
+            intersectingEdges: undefined,
+            colors: [],
+            hideEdges: false,
+        });
+    }
+
     getIntersectingEdgeIds() {
         if (this.props.partition) {
             const intersectingEdges = [];
@@ -149,12 +162,6 @@ class Graph extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
-                <button onClick={() => {
-                    this.setState(prevState => ({ hideEdges: !prevState.hideEdges }));
-                }}
-                >
-                    { `${this.state.hideEdges ? 'View' : 'Hide'} Hidden Edges` }
-                </button>
                 <div id={this.props.networkID} />
             </div>
         );

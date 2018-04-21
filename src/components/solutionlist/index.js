@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import SolutionInfo from './solutioninfo';
+
 import '../../bootstrap.min';
 
 
@@ -60,9 +62,7 @@ class SolutionList extends React.Component {
                 <style>
                     {style}
                 </style>
-                <div className="solution-stats">
-                    {JSON.stringify(this.props.solutionInfo)}
-                </div>
+                <SolutionInfo info={this.props.solutionInfo} />
                 <ul className="nav nav-tabs" data-tabs="tabs">
                     {menuItems}
                 </ul>

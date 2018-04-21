@@ -46,3 +46,15 @@
 .edit-name-group {
     padding-right: 1.5em
 }
+
+.partition-info-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.partition-info-help .dummy-text {
+    visibility: hidden;
+    margin-right: -0.5em;
+    position: relative;
+}
