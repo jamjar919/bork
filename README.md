@@ -1,6 +1,8 @@
 # bork
 Table planning/graph partitioning interface. This is the frontend and you need to run it in conjunction with the backend.
 
+![User interface](https://i.imgur.com/afpw4nq.png)
+
 Welcome to the readme!
 
 ## Installation 
